@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    image: helloworld:v3
+    ports:
+      - "4848:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root@123
+      - DB_NAME=salary_info
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+    restart: always
+
+  db:
+    image: mysql:8.0.39
+    environment:
+      - MYSQL_ROOT_PASSWORD=root@123
+      - MYSQL_DATABASE=salary_info
+    restart: always
+    healthcheck:
+      test: ["CMD","mysqladmin", "ping", "-h", "localhost"]
+      interval: 20s
+      retries: 10
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge
