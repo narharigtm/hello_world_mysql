@@ -5,6 +5,7 @@ services:
     image: narhari/demo-node-app:latest
     ports:
       - "4848:3000"
+     # - "4849:3000"
     environment:
       - DB_HOST=db
       - DB_PORT=3306
