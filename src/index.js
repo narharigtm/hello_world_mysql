@@ -1,4 +1,4 @@
-require('dotenv').config(); 
+lrequire('dotenv').config(); 
 
 // Import the Express module
 const express = require('express');
@@ -31,7 +31,7 @@ connection.connect((err) => {
 
 // Define a route for the root URL ('/')
 app.get('/', (req, res) => {
-    res.send('Hello, World from DevOps Nepal');
+    res.send('Hello, World Namaster its me DevOps Engineer Nar Hari Gautam');
 });
 
 const name = process.env.NAME || 'Guest'; 
