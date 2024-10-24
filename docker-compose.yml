@@ -2,7 +2,9 @@ version: '3.8'
 
 services:
   web:
+    
     image: narhari/demo-node-app:latest
+    pull_policy: always    
     ports:
       - "4848:3000"
      # - "4849:3000"
