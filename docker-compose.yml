@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: helloworld:v3
+    image: narhari/demo-node-app:latest
     ports:
       - "4848:3000"
     environment:
