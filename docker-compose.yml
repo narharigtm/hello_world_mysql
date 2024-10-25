@@ -2,12 +2,12 @@ version: '3.8'
 
 services:
   web:
-    
-    image: narhari/demo-node-app:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     pull_policy: always    
     ports:
       - "4848:3000"
-     # - "4849:3000"
     environment:
       - DB_HOST=db
       - DB_PORT=3306
@@ -20,6 +20,10 @@ services:
     networks:
       - app-network
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000 || exit 1"]
+      interval: 30s
+      retries: 3
 
   db:
     image: mysql:8.0.39
@@ -28,7 +32,7 @@ services:
       - MYSQL_DATABASE=salary_info
     restart: always
     healthcheck:
-      test: ["CMD","mysqladmin", "ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 20s
       retries: 10
     volumes:
