@@ -18,7 +18,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build . -t narhari/demo-nodehello:latest
+          docker build . -t narhari/hello_world_mysql-web
       
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_PASS }}
           
-              docker push narhari/demo-nodehello:latest
+              docker push narhari/hello_world_mysql-web
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
@@ -35,5 +35,5 @@ jobs:
           username: ${{ secrets.DEMO_EC2_USER }}
           key: ${{ secrets.DEMO_EC2_SSH_KEY }}
           script: |
-            #sudo docker pull narhari/demo-nodehello:latest
+            sudo docker pull narhari/hello_world_mysql-web
             sudo docker-compose -f /root/hello_world_mysql/docker-compose.yml down && sudo docker-compose -f /root/hello_world_mysql/docker-compose.yml up -d
