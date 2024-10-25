@@ -31,7 +31,7 @@ connection.connect((err) => {
 
 // Define a route for the root URL ('/')
 app.get('/', (req, res) => {
-    res.send('Hello, NSS');
+    res.send('Hello, NSS from Nepal');
 });
 
 const name = process.env.NAME || 'Guest'; 
